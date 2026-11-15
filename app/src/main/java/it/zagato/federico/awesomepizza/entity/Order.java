@@ -2,8 +2,8 @@ package it.zagato.federico.awesomepizza.entity;
 
 public class Order {
 
-    private Long id;
     private final String text;
+    private Long id;
     private OrderStatus status;
 
     public Order(String text) {

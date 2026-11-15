@@ -2,6 +2,8 @@ package it.zagato.federico.awesomepizza.repository;
 
 import it.zagato.federico.awesomepizza.entity.Order;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Primary;
@@ -27,5 +29,22 @@ public class RuntimeCustomerRepositoryTest {
         Order order2 = new Order("order2");
         order2 = repository.save(order2);
         assertEquals(2, order2.getId());
+
+        Order order3 = new Order("order3");
+        order3.setId(5L);
+        order3 = repository.save(order3);
+        assertEquals(5, order3.getId());
+    }
+
+    @Test
+    public void testFindById() {
+        Order order = new Order("order1");
+        repository.save(order);
+
+        Optional<Order> optional = repository.findById(2L);
+        assertEquals(Optional.empty(), optional);
+
+        optional = repository.findById(1L);
+        assertEquals(Optional.of(order), optional);
     }
 }

@@ -4,6 +4,7 @@ import it.zagato.federico.awesomepizza.entity.Order;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.context.annotation.Primary;
@@ -23,7 +24,9 @@ class RuntimeCustomerRepository implements CustomerRepository {
 
     @Override
     public Order save(Order order) {
-        order.setId(idGenerator.getAndIncrement());
+        if (!order.hasId()) {
+            order.setId(idGenerator.getAndIncrement());
+        }
         orders.put(order.getId(), order);
         return order;
     }
@@ -31,5 +34,13 @@ class RuntimeCustomerRepository implements CustomerRepository {
     @Override
     public Iterable<Order> findAll() {
         return orders.values();
+    }
+
+    @Override
+    public Optional<Order> findById(Long id) {
+        if (orders.containsKey(id)) {
+            return Optional.of(orders.get(id));
+        }
+        return Optional.empty();
     }
 }

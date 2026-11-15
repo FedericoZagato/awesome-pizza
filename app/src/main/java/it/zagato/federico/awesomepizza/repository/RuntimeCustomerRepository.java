@@ -27,4 +27,9 @@ class RuntimeCustomerRepository implements CustomerRepository {
         orders.put(order.getId(), order);
         return order;
     }
+
+    @Override
+    public Iterable<Order> findAll() {
+        return orders.values();
+    }
 }

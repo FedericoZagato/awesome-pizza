@@ -1,0 +1,51 @@
+package it.zagato.federico.awesomepizza.controller;
+
+import it.zagato.federico.awesomepizza.entity.Order;
+import it.zagato.federico.awesomepizza.repository.CustomerRepository;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static it.zagato.federico.awesomepizza.controller.CompanyController.BASE_URL;
+import static it.zagato.federico.awesomepizza.controller.CompanyController.LIST_ORDERS_URL;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(CompanyController.class)
+public class CompanyControllerTest {
+
+    private static final String LIST_ORDERS_FULL_URL = BASE_URL + LIST_ORDERS_URL;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockitoBean
+    private CustomerRepository repository;
+
+    @Test
+    void testListOrders() throws Exception {
+        Order order1 = new Order("margherita");
+        order1.setId(1L);
+        Order order2 = new Order("prosciutto e funghi");
+        order2.setId(2L);
+        when(repository.findAll()).thenReturn(List.of(order1, order2));
+
+        mockMvc.perform(get(LIST_ORDERS_FULL_URL))
+                .andExpect(status().isOk())
+                .andExpect(content().string(allOf(
+                        containsString("margherita"),
+                        containsString("1"),
+                        containsString("prosciutto e funghi"),
+                        containsString("2")
+                )));
+    }
+}

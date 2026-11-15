@@ -4,7 +4,7 @@ import it.zagato.federico.awesomepizza.entity.Order;
 
 import java.util.Optional;
 
-public interface CustomerRepository {
+public interface OrderRepository {
 
     Order save(Order order);
 

@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Primary
-class RuntimeCustomerRepository implements CustomerRepository {
+class RuntimeOrderRepository implements OrderRepository {
 
     private final Map<Long, Order> orders;
     private final AtomicLong idGenerator;
 
-    public RuntimeCustomerRepository() {
+    public RuntimeOrderRepository() {
         this.orders = new HashMap<>();
         this.idGenerator = new AtomicLong(1);
     }

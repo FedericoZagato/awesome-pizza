@@ -3,7 +3,7 @@ package it.zagato.federico.awesomepizza.controller;
 import it.zagato.federico.awesomepizza.dto.CreateOrderRequest;
 import it.zagato.federico.awesomepizza.dto.GetOrderStatusRequest;
 import it.zagato.federico.awesomepizza.entity.Order;
-import it.zagato.federico.awesomepizza.repository.CustomerRepository;
+import it.zagato.federico.awesomepizza.repository.OrderRepository;
 
 import java.util.Optional;
 
@@ -20,9 +20,9 @@ public class CustomerController implements CustomerAPI {
     public static final String CREATE_ORDER_URL = "/createOrder";
     public static final String GET_ORDER_STATUS_URL = "/getOrderStatus";
 
-    private final CustomerRepository repository;
+    private final OrderRepository repository;
 
-    public CustomerController(CustomerRepository repository) {
+    public CustomerController(OrderRepository repository) {
         this.repository = repository;
     }
 

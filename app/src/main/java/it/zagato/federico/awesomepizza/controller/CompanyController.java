@@ -2,7 +2,7 @@ package it.zagato.federico.awesomepizza.controller;
 
 import it.zagato.federico.awesomepizza.dto.UpdateOrderRequest;
 import it.zagato.federico.awesomepizza.entity.Order;
-import it.zagato.federico.awesomepizza.repository.CustomerRepository;
+import it.zagato.federico.awesomepizza.repository.OrderRepository;
 
 import java.util.Optional;
 
@@ -19,9 +19,9 @@ public class CompanyController implements CompanyAPI {
     public static final String LIST_ORDERS_URL = "/listOrders";
     public static final String UPDATE_ORDER_STATUS_URL = "/updateOrderStatus";
 
-    private final CustomerRepository repository;
+    private final OrderRepository repository;
 
-    public CompanyController(CustomerRepository repository) {
+    public CompanyController(OrderRepository repository) {
         this.repository = repository;
     }
 

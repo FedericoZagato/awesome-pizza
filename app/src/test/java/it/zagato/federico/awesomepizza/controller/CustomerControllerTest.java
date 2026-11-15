@@ -2,7 +2,7 @@ package it.zagato.federico.awesomepizza.controller;
 
 import it.zagato.federico.awesomepizza.entity.Order;
 import it.zagato.federico.awesomepizza.entity.OrderStatus;
-import it.zagato.federico.awesomepizza.repository.CustomerRepository;
+import it.zagato.federico.awesomepizza.repository.OrderRepository;
 
 import java.util.Optional;
 
@@ -31,7 +31,7 @@ public class CustomerControllerTest {
     private MockMvc mockMvc;
 
     @MockitoBean
-    private CustomerRepository repository;
+    private OrderRepository repository;
 
     @Test
     void testCreateOrder() throws Exception {

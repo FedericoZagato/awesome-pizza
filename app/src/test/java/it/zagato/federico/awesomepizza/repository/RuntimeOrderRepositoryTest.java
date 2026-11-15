@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Primary;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Primary
-public class RuntimeCustomerRepositoryTest {
+public class RuntimeOrderRepositoryTest {
 
-    private RuntimeCustomerRepository repository;
+    private RuntimeOrderRepository repository;
 
     @BeforeEach
     public void setUp() {
-        repository = new RuntimeCustomerRepository();
+        repository = new RuntimeOrderRepository();
     }
 
     @Test
